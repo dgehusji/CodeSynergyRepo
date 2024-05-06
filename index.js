@@ -1,12 +1,14 @@
-function moveZeroes(nums) {
-  let index = 0;
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] !== 0) {
-      nums[index++] = nums[i];
-    }
+function findRedundantConnection(edges) {
+  const parent = new Array(edges.length + 1).fill(-1);
+  for (const edge of edges) {
+    const u = find(parent, edge[0]);
+    const v = find(parent, edge[1]);
+    if (u === v) return edge;
+    parent[u] = v;
   }
-  for (let i = index; i < nums.length; i++) {
-    nums[i] = 0;
-  }
-  return nums;
+  return [];
+}
+function find(parent, i) {
+  if (parent[i] === -1) return i;
+  return find(parent, parent[i]);
 }
