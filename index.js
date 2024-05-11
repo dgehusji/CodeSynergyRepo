@@ -1,23 +1,11 @@
-function zigzagLevelOrder(root) {
-  if (!root) return [];
-  const result = [];
-  let isReverse = false;
-  const queue = [root];
-  while (queue.length) {
-    const size = queue.length;
-    const level = [];
-    for (let i = 0; i < size; i++) {
-      const node = queue.shift();
-      if (isReverse) {
-        level.unshift(node.val);
-      } else {
-        level.push(node.val);
-      }
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-    }
-    result.push(level);
-    isReverse = !isReverse;
+function searchInsert(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) return mid;
+    if (nums[mid] < target) left = mid + 1;
+    else right = mid - 1;
   }
-  return result;
+  return left;
 }
